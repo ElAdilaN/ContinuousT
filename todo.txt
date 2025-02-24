@@ -1,0 +1,53 @@
+3. Break the Tests on Purpose
+To ensure that GitHub Actions catches failures, modify calculator.test.js with a wrong expected result. For example:
+
+javascript
+Copier
+Modifier
+test('adds two numbers incorrectly', () => {
+  expect(add(1, 2)).toBe(5); // Wrong expectation!
+});
+Then, push the change:
+
+bash
+Copier
+Modifier
+git add calculator.test.js
+git commit -m "Intentionally break a test"
+git push origin main
+This should make the GitHub Actions test fail (❌). If it fails, that means your CI setup is working correctly!
+
+4. Fix the Test and Push Again
+Now, fix the test by restoring the correct expectation:
+
+javascript
+Copier
+Modifier
+test('adds two numbers correctly', () => {
+  expect(add(1, 2)).toBe(3);
+});
+Push the fix:
+
+bash
+Copier
+Modifier
+git add calculator.test.js
+git commit -m "Fix broken test"
+git push origin main
+Your GitHub Actions should now pass (✅) again.
+
+5. Add More Tests (Optional)
+If you want to expand testing, try adding more cases, like:
+
+Negative numbers
+Large numbers
+Edge cases (e.g., 0 values, NaN inputs)
+Example:
+
+javascript
+Copier
+Modifier
+test('adds negative numbers', () => {
+  expect(add(-3, -6)).toBe(-9);
+});
+Push the changes, and GitHub Actions will automatically test them.
